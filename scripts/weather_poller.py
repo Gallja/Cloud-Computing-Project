@@ -43,7 +43,7 @@ def fetch_and_send_weather():
             time.sleep(2)
             
         print("Ciclo completato.")
-        time.sleep(15)
+        time.sleep(2)
 
 if __name__ == "__main__":
     fetch_and_send_weather()
