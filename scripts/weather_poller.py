@@ -4,12 +4,12 @@ import time
 API_PRODUCER_URL = "http://127.0.0.1:8000/event"
 
 CITIES = {
-    "Milano": {"lat": 45.4642, "lon": 9.1900},
-    "Torino": {"lat": 45.0703, "lon": 7.6869},
-    "Verona": {"lat": 45.4384, "lon": 10.9916},
-    "Firenze": {"lat": 43.7696, "lon": 11.2558},
-    "Roma": {"lat": 41.9028, "lon": 12.4964},
-    "Napoli": {"lat": 40.8518, "lon": 14.2681}
+    "Milano": {"lat": 45.46427, "lon": 9.18951},
+    "Torino": {"lat": 45.07049, "lon": 7.68682},
+    "Verona": {"lat": 45.4299, "lon": 10.9844},
+    "Firenze": {"lat": 43.77925, "lon": 11.24626},
+    "Roma": {"lat": 41.89193, "lon": 12.51133},
+    "Napoli": {"lat": 40.85631, "lon": 14.24641}
 }
 
 def fetch_and_send_weather():
