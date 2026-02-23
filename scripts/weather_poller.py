@@ -35,6 +35,7 @@ def fetch_and_send_weather():
                     
                     post_response = requests.post(API_PRODUCER_URL, json=payload, timeout=4)
                     print(f"Inviato dato per {city_name}: {payload['temperature']}°C - Status API: {post_response.status_code}")
+                    # print(f"Dato estratto per {city_name}: {payload}")
                     
             except Exception as e:
                 print(f"Errore durante l'elaborazione di {city_name}: {e}")
