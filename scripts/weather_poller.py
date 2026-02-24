@@ -1,7 +1,7 @@
 import requests
 import time
 
-API_PRODUCER_URL = "http://127.0.0.1:8000/event"
+API_PRODUCER_URL = "http://127.0.0.1:8000/weather"
 
 CITIES = {
     "Milano": {"lat": 45.46427, "lon": 9.18951},
