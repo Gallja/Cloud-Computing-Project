@@ -83,7 +83,7 @@ def start_kafka_thread():
         threading.Thread(target=kafa_background_loop, daemon=True).start()
         started = True
 
-@webapp.before_first_request
+@webapp.before_request
 def before():
     start_kafka_thread()
 
