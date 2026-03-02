@@ -96,6 +96,29 @@ services:
     networks:
       - weather-net
 
+  dashboard:
+    build: ./services/dashboard
+    ports:
+      - "8500:8500"
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - api-producer
+    environment:
+      KAFKA_BOOTSTRAP: kafka-1:9093,kafka-2:9095,kafka-3:9097
+      TOPIC_NOTIFICATIONS: weather.telemetry
+      API_BASE: http://api-producer:8000
+      
+      KAFKA_SECURITY_PROTOCOL: SSL
+      KAFKA_SSL_CA_LOCATION: /app/security/ca.crt
+      KAFKA_SSL_CERTIFICATE_LOCATION: /app/security/client-creds/kafka.client.certificate.pem
+      KAFKA_SSL_KEY_LOCATION: /app/security/client-creds/kafka.client.key
+    volumes:
+      - ./security:/app/security:ro,z
+    networks:
+      - weather-net
+
 networks:
   weather-net:
     driver: bridge
