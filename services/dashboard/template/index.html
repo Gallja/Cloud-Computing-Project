@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Weather Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Real-Time Weather Dashboard</h1>
+        <button id="stress-btn" onclick="startStressTest()">Stress Test</button>
+    </header>
+
+    <main id="dashboard-grid" class="grid"></main>
+</body>
+</html>

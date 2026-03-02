@@ -1,0 +1,3 @@
+Flask
+confluent-kafka
+requests
