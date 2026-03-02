@@ -1,4 +1,4 @@
-import os, json, threading, queue, time, re, random
+import os, json, threading, queue, time, random
 import requests
 from flask import Flask, Response, render_template, jsonify
 from confluent_kafka import Consumer
