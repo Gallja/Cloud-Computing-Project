@@ -1,4 +1,5 @@
 import os, json, threading, queue, time, random
+from urllib import response
 import requests
 from flask import Flask, Response, render_template, jsonify
 from confluent_kafka import Consumer
@@ -72,7 +73,10 @@ def stress_test(n=200, delay=0.1):
             "weathercode": random.randint(0, 100)
         }
         try:
-            requests.post(f"{API_BASE}/weather", json=payload, timeout=5)
+            response = requests.post(f"{API_BASE}/weather", json=payload, timeout=5)
+
+            if response.status_code != 200:
+                print(f"Errore API: {response.status_code} - Motivo: {response.text}")
         except Exception as e:
             print(f"Errore durante lo stress test: {e}")
         time.sleep(delay)
