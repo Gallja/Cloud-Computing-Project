@@ -18,6 +18,11 @@ class WeatherData(BaseModel):
     windspeed: float
     is_day: int
     weathercode: int
+    precipitation: float
+    rain: float
+    cloud_cover: float
+    surface_pressure: float
+    sunshine_duration: float
 
 def kafka_ssl_base():
     cfg = {
