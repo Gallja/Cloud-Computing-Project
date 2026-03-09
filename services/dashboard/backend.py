@@ -46,22 +46,42 @@ def kafa_background_loop():
             windspeed = data.get("windspeed", "N/A")
             is_day = data.get("is_day", 0)
             weathercode = data.get("weathercode", -1)
+            precipitation = data.get("precipitation", 0.0)
+            rain = data.get("rain", 0.0)
+            cloud_cover = data.get("cloud_cover", 0.0)
+            surface_pressure = data.get("surface_pressure", 1000.0)
+            sunshine_duration = data.get("sunshine_duration", 0.0)
             
             with state_lock:
                 state[city] = {
                     "temperature": temperature,
                     "windspeed": windspeed,
                     "is_day": is_day,
-                    "weathercode": weathercode
+                    "weathercode": weathercode,
+                    "precipitation": precipitation,
+                    "rain": rain,
+                    "cloud_cover": cloud_cover,
+                    "surface_pressure": surface_pressure,
+                    "sunshine_duration": sunshine_duration
                 }
             
-            output_queue.put(json.dumps({"city": city, "temperature": temperature, "windspeed": windspeed, "is_day": is_day, "weathercode": weathercode}))
+            output_queue.put(json.dumps({
+                "city": city, 
+                "temperature": temperature, 
+                "windspeed": windspeed, 
+                "is_day": is_day, 
+                "weathercode": weathercode, 
+                "precipitation": precipitation, 
+                "rain": rain, 
+                "cloud_cover": cloud_cover, 
+                "surface_pressure": surface_pressure, 
+                "sunshine_duration": sunshine_duration}))
         
         except Exception as e:
-            print(f"Errore di lettura: {e}")
+            print(f"Error: {e}")
 
 def stress_test(n=200, delay=0.1):
-    CITIES = ["Milano", "Torino", "Verona", "Firenze", "Roma", "Napoli"]
+    CITIES = ["Milan", "Turin", "Verona", "Florence", "Rome", "Naples"]
 
     for _ in range(n):
         city = random.choice(CITIES)
@@ -70,15 +90,20 @@ def stress_test(n=200, delay=0.1):
             "temperature": round(random.uniform(-10, 35), 2),
             "windspeed": round(random.uniform(0, 20), 2),
             "is_day": random.choice([0, 1]),
-            "weathercode": random.randint(0, 100)
+            "weathercode": random.randint(0, 100),
+            "precipitation": round(random.uniform(0, 50), 2),
+            "rain": round(random.uniform(0, 50), 2),
+            "cloud_cover": round(random.uniform(0, 100), 2),
+            "surface_pressure": round(random.uniform(980, 1050), 2),
+            "sunshine_duration": round(random.uniform(0, 43200), 2)
         }
         try:
             response = requests.post(f"{API_BASE}/weather", json=payload, timeout=5)
 
             if response.status_code != 200:
-                print(f"Errore API: {response.status_code} - Motivo: {response.text}")
+                print(f"API error: {response.status_code} - {response.text}")
         except Exception as e:
-            print(f"Errore durante lo stress test: {e}")
+            print(f"API error during stress test: {e}")
         time.sleep(delay)
 
 def start_kafka_thread():
@@ -111,7 +136,7 @@ def index():
 @webapp.post("/admin/stress")
 def admin_stress():
     threading.Thread(target=stress_test, daemon=True).start()
-    return jsonify({"status": "Stress test avviato", "message": "Verranno inviati 200 dati casuali con un intervallo di 0.1 secondi"})
+    return jsonify({"status": "Stress test started", "message": "It will be sent 200 random data points with a delay of 0.1 seconds between them."})
 
 if __name__ == "__main__":
     webapp.run(host="0.0.0.0", port=8500, debug=True)
