@@ -50,7 +50,7 @@ function startStressTest() {
         .then(response => response.json())
         .then(data => {
             console.log(data.status);
-            alert("Tempesta in arrivo! Guarda i grafici impazzire.");
+            alert("Stress test avviato.");
         })
         .catch(error => console.error('Errore:', error));
 }
