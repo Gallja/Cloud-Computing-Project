@@ -10,7 +10,7 @@ function updateOrCreateCard(data) {
     const cardId = "card-" + data.city.replace(/\s+/g, '');
     let card = document.getElementById(cardId);
 
-    const timeIcon = data.is_day === 1 ? "Giorno" : "Notte";
+    const timeIcon = data.is_day === 1 ? "Day" : "Night";
 
     if (!card) {
         card = document.createElement("div");
@@ -26,15 +26,32 @@ function updateOrCreateCard(data) {
                 </div>
                 <div class="card-body">
                     <div class="metric">
-                        <span class="label">Temperatura</span>
+                        <span class="label">Temperature</span>
                         <span class="value temp">${data.temperature}°C</span>
                     </div>
                     <div class="metric">
-                        <span class="label">Vento</span>
+                        <span class="label">Wind Speed</span>
                         <span class="value wind">${data.windspeed} km/h</span>
                     </div>
-                    <div class="metric code">
-                        <span class="label">Codice Meteo:</span> ${data.weathercode}
+                    <div class="metric">
+                        <span class="label">Precipitation</span>
+                        <span class="value">${data.precipitation} mm</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Rain</span>
+                        <span class="value">${data.rain} mm</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Cloud Cover</span>
+                        <span class="value">${data.cloud_cover} %</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Surface Pressure</span>
+                        <span class="value">${data.surface_pressure} hPa</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Sunshine Duration</span>
+                        <span class="value">${data.sunshine_duration} s</span>
                     </div>
                 </div>
             `;
