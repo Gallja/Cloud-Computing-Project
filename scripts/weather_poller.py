@@ -30,7 +30,7 @@ def fetch_and_send_weather():
                 if response.status_code == 200:
                     data = response.json()
 
-                    current = data.get("current_weather", {})
+                    current = data.get("current", {})
                     daily = data.get("daily", {})
 
                     sunshine_today = 0
