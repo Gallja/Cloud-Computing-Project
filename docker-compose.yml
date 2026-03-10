@@ -42,9 +42,9 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       
       KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.kafka-1.truststore.pkcs12
-      KAFKA_SSL_TRUSTSTORE_PASSWORD: Gallja21
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
       KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka.kafka-1.keystore.pkcs12
-      KAFKA_SSL_KEYSTORE_PASSWORD: Gallja21
+      KAFKA_SSL_KEYSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
       KAFKA_DEFAULT_REPLICATION_FACTOR: 3
     volumes:
       - ./security/kafka-1-creds:/etc/kafka/secrets
@@ -66,9 +66,9 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       
       KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.kafka-2.truststore.pkcs12
-      KAFKA_SSL_TRUSTSTORE_PASSWORD: Gallja21
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
       KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka.kafka-2.keystore.pkcs12
-      KAFKA_SSL_KEYSTORE_PASSWORD: Gallja21
+      KAFKA_SSL_KEYSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
       KAFKA_DEFAULT_REPLICATION_FACTOR: 3
     volumes:
       - ./security/kafka-2-creds:/etc/kafka/secrets
@@ -90,9 +90,9 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       
       KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.kafka-3.truststore.pkcs12
-      KAFKA_SSL_TRUSTSTORE_PASSWORD: Gallja21
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
       KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka.kafka-3.keystore.pkcs12
-      KAFKA_SSL_KEYSTORE_PASSWORD: Gallja21
+      KAFKA_SSL_KEYSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
       KAFKA_DEFAULT_REPLICATION_FACTOR: 3
     volumes:
       - ./security/kafka-3-creds:/etc/kafka/secrets
