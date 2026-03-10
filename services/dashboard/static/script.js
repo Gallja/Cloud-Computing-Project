@@ -67,7 +67,7 @@ function startStressTest() {
         .then(response => response.json())
         .then(data => {
             console.log(data.status);
-            alert("Stress test avviato.");
+            alert("Stress test started.");
         })
-        .catch(error => console.error('Errore:', error));
+        .catch(error => console.error('Error:', error));
 }
