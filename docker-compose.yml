@@ -136,8 +136,8 @@ services:
       GROUP_ID: notifier-group
       KAFKA_SECURITY_PROTOCOL: SSL
       KAFKA_SSL_CA_LOCATION: /app/security/ca.crt
-      KAFKA_SSL_CERTIFICATE_LOCATION: /app/security/client.pem
-      KAFKA_SSL_KEY_LOCATION: /app/security/client.key
+      KAFKA_SSL_CERTIFICATE_LOCATION: /app/security/client-creds/kafka.client.certificate.pem
+      KAFKA_SSL_KEY_LOCATION: /app/security/client-creds/kafka.client.key
     volumes:
       - ./security:/app/security:ro,z
     networks:

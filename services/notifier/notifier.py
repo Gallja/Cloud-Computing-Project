@@ -11,8 +11,8 @@ def kafka_ssl_base():
         "bootstrap.servers": BOOT,
         "security.protocol": os.getenv("KAFKA_SECURITY_PROTOCOL", "SSL"),
         "ssl.ca.location": os.getenv("KAFKA_SSL_CA_LOCATION", "/app/security/ca.crt"),
-        "ssl.certificate.location": os.getenv("KAFKA_SSL_CERTIFICATE_LOCATION", "/app/security/client.pem"),
-        "ssl.key.location": os.getenv("KAFKA_SSL_KEY_LOCATION", "/app/security/client.key"),
+        "ssl.certificate.location": os.getenv("KAFKA_SSL_CERTIFICATE_LOCATION", "/app/security/client-creds/kafka.client.certificate.pem"),
+        "ssl.key.location": os.getenv("KAFKA_SSL_KEY_LOCATION", "/app/security/client-creds/kafka.client.key"),
     }
 
 cons = Consumer({
