@@ -49,11 +49,11 @@ try:
             precipitation = data.get("precipitation", 0.0)
             
             alert = None
-            if temperature > 35.0:
+            if temperature > 30.0:
                 alert = f"High temperature alert for {city}: {temperature}°C"
             elif temperature < 0.0:
                 alert = f"Low temperature alert for {city}: {temperature}°C"
-            elif precipitation > 50.0:
+            elif precipitation > 40.0:
                 alert = f"Heavy rain alert for {city}: {precipitation}mm"
             
             if alert:
