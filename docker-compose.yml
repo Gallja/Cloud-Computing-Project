@@ -143,6 +143,42 @@ services:
     networks:
       - weather-net
 
+  mongodb:
+    image: mongo:6.0
+    container_name: weather-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - weather-net
+
+  storage:
+    build: ./services/storage
+    container_name: weather-storage
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - mongodb
+    environment:
+      KAFKA_BOOTSTRAP: kafka-1:9093,kafka-2:9095,kafka-3:9097
+      TOPIC_TELEMETRY: weather.telemetry
+      GROUP_ID: storage-group
+      MONGO_URI: mongodb://mongodb:27017/
+      
+      KAFKA_SECURITY_PROTOCOL: SSL
+      KAFKA_SSL_CA_LOCATION: /app/security/ca.crt
+      KAFKA_SSL_CERTIFICATE_LOCATION: /app/security/client-creds/kafka.client.certificate.pem
+      KAFKA_SSL_KEY_LOCATION: /app/security/client-creds/kafka.client.key
+    volumes:
+      - ./security:/app/security:ro,z
+    networks:
+      - weather-net
+
 networks:
   weather-net:
     driver: bridge
+
+volumes:
+  mongodb_data:
