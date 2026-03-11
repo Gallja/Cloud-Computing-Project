@@ -122,6 +122,12 @@ def health():
 @webapp.get("/stream")
 def stream():
     def event_stream():
+        with state_lock:
+            snapshot = dict(state)
+        
+        for city, data in snapshot.items():
+            yield f"data: {json.dumps({'city': city, **data})}\n\n"
+        
         while True:
             data = output_queue.get()
             yield f"data: {data}\n\n"
