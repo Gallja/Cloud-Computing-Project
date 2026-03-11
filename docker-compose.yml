@@ -4,9 +4,12 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
+      kafka-1:
+        condition: service_healthy
+      kafka-2:
+        condition: service_healthy
+      kafka-3:
+        condition: service_healthy
     environment:
       KAFKA_BOOTSTRAP: kafka-1:9093,kafka-2:9095,kafka-3:9097
       TOPIC_EVENTS: weather.telemetry
@@ -122,10 +125,14 @@ services:
     ports:
       - "8500:8500"
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
-      - api-producer
+      kafka-1:
+        condition: service_healthy
+      kafka-2:
+        condition: service_healthy
+      kafka-3:
+        condition: service_healthy
+      api-producer:
+        condition: service_started
     environment:
       KAFKA_BOOTSTRAP: kafka-1:9093,kafka-2:9095,kafka-3:9097
       TOPIC_NOTIFICATIONS: weather.telemetry
@@ -141,12 +148,16 @@ services:
       - weather-net
 
   notifier:
+    restart: on-failure
     build: ./services/notifier
     container_name: weather-notifier
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
+      kafka-1:
+        condition: service_healthy
+      kafka-2:
+        condition: service_healthy
+      kafka-3:
+        condition: service_healthy
     environment:
       KAFKA_BOOTSTRAP: kafka-1:9093,kafka-2:9095,kafka-3:9097
       TOPIC_TELEMETRY: weather.telemetry
@@ -170,13 +181,18 @@ services:
       - weather-net
 
   storage:
+    restart: on-failure
     build: ./services/storage
     container_name: weather-storage
     depends_on:
-      - kafka-1
-      - kafka-2
-      - kafka-3
-      - mongodb
+      kafka-1:
+        condition: service_healthy
+      kafka-2:
+        condition: service_healthy
+      kafka-3:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
     environment:
       KAFKA_BOOTSTRAP: kafka-1:9093,kafka-2:9095,kafka-3:9097
       TOPIC_TELEMETRY: weather.telemetry
