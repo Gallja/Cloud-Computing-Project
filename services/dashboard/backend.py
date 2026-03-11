@@ -1,5 +1,4 @@
 import os, json, threading, queue, time, random
-from urllib import response
 import requests
 from flask import Flask, Response, render_template, jsonify
 from confluent_kafka import Consumer
@@ -27,7 +26,7 @@ def kafka_ssl_base():
         "auto.offset.reset": "latest"
     }
 
-def kafa_background_loop():
+def kafka_background_loop():
     consumer = Consumer(kafka_ssl_base())
     consumer.subscribe([TOPIC])
     
@@ -109,7 +108,7 @@ def stress_test(n=200, delay=0.1):
 def start_kafka_thread():
     global started
     if not started:
-        threading.Thread(target=kafa_background_loop, daemon=True).start()
+        threading.Thread(target=kafka_background_loop, daemon=True).start()
         started = True
 
 @webapp.before_request
