@@ -36,7 +36,7 @@ def kafa_background_loop():
         if msg is None:
             continue
         if msg.error():
-            print(f"Errore Kafka: {msg.error()}")
+            print(f"Kafka error: {msg.error()}")
             continue
         
         try:
