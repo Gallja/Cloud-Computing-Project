@@ -1,3 +1,4 @@
 /security/generate_certs.sh
 rogue_client.py
+rogue_client_2.py
 .env
