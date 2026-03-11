@@ -164,8 +164,6 @@ services:
   mongodb:
     image: mongo:6.0
     container_name: weather-mongodb
-    ports:
-      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
     networks:
