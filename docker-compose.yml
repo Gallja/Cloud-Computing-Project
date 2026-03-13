@@ -208,6 +208,32 @@ services:
     networks:
       - weather-net
 
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "8080:8080"
+    depends_on:
+      kafka-1:
+        condition: service_healthy
+      kafka-2:
+        condition: service_healthy
+      kafka-3:
+        condition: service_healthy
+    environment:
+      KAFKA_CLUSTERS_0_NAME: weather-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1:9093,kafka-2:9095,kafka-3:9097
+      
+      KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SSL
+      KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_LOCATION: /app/security/kafka-1-creds/kafka.kafka-1.truststore.pkcs12
+      KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
+      KAFKA_CLUSTERS_0_PROPERTIES_SSL_KEYSTORE_LOCATION: /app/security/kafka-1-creds/kafka.kafka-1.keystore.pkcs12
+      KAFKA_CLUSTERS_0_PROPERTIES_SSL_KEYSTORE_PASSWORD: ${KAFKA_SSL_PASSWORD}
+    volumes:
+      - ./security:/app/security:ro,z
+    networks:
+      - weather-net
+
 networks:
   weather-net:
     driver: bridge
