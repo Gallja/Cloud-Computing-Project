@@ -46,6 +46,6 @@ The entire architecture is based to be "Cloud-Ready", isolating processes in con
 Industrial standards respected:
 - *Fault Tolerance*: Kafka Cluster is configured with a replication factor of 3. Data is replicated accross phisically separated nodes, so, in case of a node failure, _Zookeeper_ automatically promotes a backup replice (_ISR_) to a new leader whithin few milliseconds, without any event loss or interruption of the service.
 - *Security*: Internal communication between microservices and Kafka cluster is encrypted using _*mTLS* (Mutual Transport Layer Security)_ protocol. Each Kafka node and each Python microservice is equipped with a cryptographic certificate and a private key signed by an internal _*CA* (Certificate Authority)_. Without valid certificates mounted in the containers, access to the topics is mathematically imposssible.
-- *Load Balancing*: 
+- *Load Balancing*: this requirement is handled natively by Apache Kafka architecture, comining topic partitioning with the strategic use of consumer groups. Services like Notifier and Storage use static Group IDs: in case of horizontal scaling, Kafka ripartizes autonomatically topic's partitions among the replicas of the microservice, balancing the load perfectly. The only exception is the Dashboard, which uses a dynamic Group ID to allow multiple instances and to consume the same data in parallel, without load balancing, for real-time visualization (broadcasting pattern).
 
-= Showcase
+= Showcases
