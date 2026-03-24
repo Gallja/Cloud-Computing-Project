@@ -5,7 +5,7 @@ from confluent_kafka import Consumer
 
 BOOT = os.getenv("KAFKA_BOOTSTRAP", "kafka-1:9093")
 TOPIC = os.getenv("TOPIC_NOTIFICATIONS", "weather.telemetry")
-GROUP = os.getenv("DASHBOARD_GROUP_ID", f"dashboard-group")
+GROUP = os.getenv("DASHBOARD_GROUP_ID", f"dashboard-group-{random.randint(1, 10000)}")
 API_BASE = os.getenv("API_BASE", "http://api-producer:8000")
 
 webapp = Flask(__name__, static_folder="static", template_folder="template")
