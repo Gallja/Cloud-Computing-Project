@@ -11,6 +11,7 @@
   ],
   table-of-contents: none, 
   listing-index: (enabled: false),
+  chapter-pagebreak: false,
 )
 
 = Introduction
@@ -18,7 +19,8 @@ This project is about building and implementing a _*Cloud-Native*_ architecture 
 
 
 = Architectural overview
-The entire infrastructure is based on an architectural pattern with deacupled microservices: the communication is not direct, but rather mediated by a message broker, in this case Apache Kafka. This design allows for greater flexibility and scalability, as each microservice can be developed, deployed and scaled independently, without affecting the others. The main components of the system are:
+The entire infrastructure is based on an architectural pattern with deacupled microservices. The communication is not direct, but rather mediated by a message broker, in this case Apache Kafka. This is the architectural overview of the system:
+
 
 
 
@@ -49,3 +51,17 @@ Industrial standards respected:
 - *Load Balancing*: this requirement is handled natively by Apache Kafka architecture, comining topic partitioning with the strategic use of consumer groups. Services like Notifier and Storage use static Group IDs: in case of horizontal scaling, Kafka ripartizes autonomatically topic's partitions among the replicas of the microservice, balancing the load perfectly. The only exception is the Dashboard, which uses a dynamic Group ID to allow multiple instances and to consume the same data in parallel, without load balancing, for real-time visualization (broadcasting pattern).
 
 = Showcases
+#figure(
+  image("/img/kafka-UI.png", width: 80%),
+  caption: [Load Balancing on 6 partitions of the `weather.telemetry` topic, thanks to #link("https://github.com/provectus/kafka-ui")[Kafka-UI].]
+) <fig:kafka-UI>
+
+#figure(
+  image("/img/dashboard.png", width: 80%),
+  caption: [Frontend Dashboard with Real-time data.]
+) <fig:dashboard>
+
+#figure(
+  image("/img/forwarder.png", width: 80%),
+  caption: [Telegram Forwarder chat with some weather alerts.]
+) <fig:forwarder>
