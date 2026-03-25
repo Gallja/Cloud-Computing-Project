@@ -15,13 +15,16 @@
 )
 
 = Introduction
-This project is about building and implementing a _*Cloud-Native*_ architecture for real-time weather telemetry using _Apache Kafka_. The system is designed to collect, process, and store real-time meteorological data from six different cities in Italy: Milan, Turin, Verona, Florence, Rome and Naples (the data is retrieved via _REST API_ available on #link("https://open-meteo.com/")[`open-meteo.com`]). In addition, a continuos stream of measurements (temperature, rainfall, wind speed...) is simulated by an external script and sent to the Kafka cluster. From there, the data is consumed in parallel by multiple microservices for specific purposes: real-time data visualization via a web dashboard, data storage in NoSQL database and alert generation for extreme weather conditions, forwarded to a smartphone via Telegram bot. The main focus is to garantee the system's scalability, reliability, criptographic security and fault-tolerance.
+This project is about building and implementing a _*Cloud-Native*_ architecture for real-time weather telemetry using _Apache Kafka_. The system is designed to collect, process, and store real-time meteorological data from six different cities in Italy: Milan, Turin, Verona, Florence, Rome and Naples (the data is retrieved via _REST API_ available on #link("https://open-meteo.com/")[`open-meteo.com`]). In addition, a continuos stream of measurements (temperature, rainfall, wind speed...) is simulated by an external script and sent to the Kafka cluster. From there, the data is consumed in parallel by multiple microservices for specific purposes: real-time data visualization via a web dashboard, data storage in _NoSQL_ database and alert generation for extreme weather conditions, forwarded to a smartphone via Telegram bot. The main focus is to garantee the system's scalability, reliability, criptographic security and fault-tolerance.
 
 
 = Architectural overview
 The entire infrastructure is based on an architectural pattern with deacupled microservices. The communication is not direct, but rather mediated by a message broker, in this case Apache Kafka. This is the architectural overview of the system:
 
-
+#figure(
+  image("/img/system_overview.png", width: 52%),
+  caption: [Architectural overview of the system.]
+) <fig:arch-overview>
 
 
 = Description of the system
