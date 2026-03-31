@@ -1,0 +1,7 @@
+# Weather Flow: Real-Time weather telemetry via Apache Kafka
+
+This project was developed for the Cloud Computing Technology course within the [Master’s Degree in Computer Science](https://www.unimi.it/it/corsi/laurea-magistrale/informatica-magistrale) at the [University of Milan](https://www.unimi.it/it).
+
+This project is about building and implementing a _*Cloud-Native*_ architecture for Real-Time weather telemetry using _Apache Kafka_. The system is designed to collect, process, and store Real-Time meteorological data from six different cities in Italy: Milan, Turin, Verona, Florence, Rome and Naples (the data is retrieved via _REST API_ available on [`open-meteo.com`](https://open-meteo.com/). In addition, a continuous stream of measurements (temperature, rainfall, wind speed...) is simulated by an external script and sent to the Kafka cluster. From there, the data is consumed in parallel by multiple microservices for specific purposes: Real-Time data visualization via a web dashboard, data storage in _NoSQL_ database and alert generation for extreme weather conditions, forwarded to a smartphone via Telegram bot.
+
+The report of the project, in PDF format, providing an overview of the entire architecture is availabele [here](/report/main.pdf).
