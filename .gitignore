@@ -1,12 +1,5 @@
-security/*.crt
-security/*.key
-security/*.pem
-security/*.pkcs12
-security/*.jks
-security/*.csr
-security/*.srl
-
-!security/generate-certs.sh
+security/*
+!security/generate_certs.sh
 
 rogue_client.py
 rogue_client_2.py
