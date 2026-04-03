@@ -58,7 +58,7 @@ def produce_weather(data: WeatherData):
             "status": "ok", 
             "eventId": data.eventId, 
             "city": data.city, 
-            "message": "Dato meteo inviato a Kafka con successo"
+            "message": "Sent data to Kafka topic successfully"
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
