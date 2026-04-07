@@ -133,6 +133,12 @@ services:
     build: ./services/dashboard
     ports:
       - "8500:8500"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8500/healthz')\" || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     depends_on:
       kafka-1:
         condition: service_healthy
